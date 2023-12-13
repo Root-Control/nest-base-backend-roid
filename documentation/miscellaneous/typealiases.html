@@ -1,0 +1,576 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>structure documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+
+               if ($darkModeToggles.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">structure documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content miscellaneous-typealiases">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Miscellaneous</li>
+  <li class="breadcrumb-item">Type aliases</li>
+</ol>
+
+<section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <ul class="index-list">
+                        <li>
+                            <a href="#ArticleDocument" title="src/modules/articles/article.schema.ts" ><b>ArticleDocument</b>&nbsp;&nbsp;&nbsp;(src/.../article.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CategoryDocument" title="src/modules/categories/category.schema.ts" ><b>CategoryDocument</b>&nbsp;&nbsp;&nbsp;(src/.../category.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CommentDocument" title="src/modules/comments/comment.schema.ts" ><b>CommentDocument</b>&nbsp;&nbsp;&nbsp;(src/.../comment.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CommonNameDocument" title="src/modules/steroids/common-names/common-name.schema.ts" ><b>CommonNameDocument</b>&nbsp;&nbsp;&nbsp;(src/.../common-name.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#Constructor" title="src/types.ts" ><b>Constructor</b>&nbsp;&nbsp;&nbsp;(src/.../types.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#Constructor" title="src/@common/global-types/types.ts" ><b>Constructor</b>&nbsp;&nbsp;&nbsp;(src/.../types.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#DbConfig" title="src/@common/env-configuration/config.type.ts" ><b>DbConfig</b>&nbsp;&nbsp;&nbsp;(src/.../config.type.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#EnvConfiguration" title="src/@common/env-configuration/config.type.ts" ><b>EnvConfiguration</b>&nbsp;&nbsp;&nbsp;(src/.../config.type.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#IBooleanFieldOptions" title="src/@common/decorators/field.decorators.ts" ><b>IBooleanFieldOptions</b>&nbsp;&nbsp;&nbsp;(src/.../field.decorators.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#IClassFieldOptions" title="src/@common/decorators/field.decorators.ts" ><b>IClassFieldOptions</b>&nbsp;&nbsp;&nbsp;(src/.../field.decorators.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#IEnumFieldOptions" title="src/@common/decorators/field.decorators.ts" ><b>IEnumFieldOptions</b>&nbsp;&nbsp;&nbsp;(src/.../field.decorators.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#JwtConfig" title="src/@common/env-configuration/config.type.ts" ><b>JwtConfig</b>&nbsp;&nbsp;&nbsp;(src/.../config.type.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#KeyOfType" title="src/types.ts" ><b>KeyOfType</b>&nbsp;&nbsp;&nbsp;(src/.../types.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#KeyOfType" title="src/@common/global-types/types.ts" ><b>KeyOfType</b>&nbsp;&nbsp;&nbsp;(src/.../types.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ManufacturerDocument" title="src/modules/steroids/manufacturers/manufacturer.schema.ts" ><b>ManufacturerDocument</b>&nbsp;&nbsp;&nbsp;(src/.../manufacturer.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ReviewDocument" title="src/modules/reviews/review.schema.ts" ><b>ReviewDocument</b>&nbsp;&nbsp;&nbsp;(src/.../review.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#SourceDocument" title="src/modules/sources/source.schema.ts" ><b>SourceDocument</b>&nbsp;&nbsp;&nbsp;(src/.../source.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#SteroidDocument" title="src/modules/steroids/steroids/steroid.schema.ts" ><b>SteroidDocument</b>&nbsp;&nbsp;&nbsp;(src/.../steroid.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#UserDocument" title="src/modules/users/user.schema.ts" ><b>UserDocument</b>&nbsp;&nbsp;&nbsp;(src/.../user.schema.ts)</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <h3>src/modules/articles/article.schema.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ArticleDocument"></a>
+                    <span class="name "><b>ArticleDocument</b><a href="#ArticleDocument"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/modules/categories/category.schema.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CategoryDocument"></a>
+                    <span class="name "><b>CategoryDocument</b><a href="#CategoryDocument"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/modules/comments/comment.schema.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CommentDocument"></a>
+                    <span class="name "><b>CommentDocument</b><a href="#CommentDocument"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/modules/steroids/common-names/common-name.schema.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CommonNameDocument"></a>
+                    <span class="name "><b>CommonNameDocument</b><a href="#CommonNameDocument"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/types.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="Constructor"></a>
+                    <span class="name "><b>Constructor</b><a href="#Constructor"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="KeyOfType"></a>
+                    <span class="name "><b>KeyOfType</b><a href="#KeyOfType"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/@common/global-types/types.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="Constructor"></a>
+                    <span class="name "><b>Constructor</b><a href="#Constructor"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="KeyOfType"></a>
+                    <span class="name "><b>KeyOfType</b><a href="#KeyOfType"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/@common/env-configuration/config.type.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DbConfig"></a>
+                    <span class="name "><b>DbConfig</b><a href="#DbConfig"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="EnvConfiguration"></a>
+                    <span class="name "><b>EnvConfiguration</b><a href="#EnvConfiguration"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="JwtConfig"></a>
+                    <span class="name "><b>JwtConfig</b><a href="#JwtConfig"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/@common/decorators/field.decorators.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="IBooleanFieldOptions"></a>
+                    <span class="name "><b>IBooleanFieldOptions</b><a href="#IBooleanFieldOptions"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../interfaces/IFieldOptions.html" target="_self" >IFieldOptions</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="IClassFieldOptions"></a>
+                    <span class="name "><b>IClassFieldOptions</b><a href="#IClassFieldOptions"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../interfaces/IFieldOptions.html" target="_self" >IFieldOptions</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="IEnumFieldOptions"></a>
+                    <span class="name "><b>IEnumFieldOptions</b><a href="#IEnumFieldOptions"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../interfaces/IFieldOptions.html" target="_self" >IFieldOptions</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/modules/steroids/manufacturers/manufacturer.schema.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ManufacturerDocument"></a>
+                    <span class="name "><b>ManufacturerDocument</b><a href="#ManufacturerDocument"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/modules/reviews/review.schema.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ReviewDocument"></a>
+                    <span class="name "><b>ReviewDocument</b><a href="#ReviewDocument"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/modules/sources/source.schema.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="SourceDocument"></a>
+                    <span class="name "><b>SourceDocument</b><a href="#SourceDocument"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/modules/steroids/steroids/steroid.schema.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="SteroidDocument"></a>
+                    <span class="name "><b>SteroidDocument</b><a href="#SteroidDocument"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/modules/users/user.schema.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="UserDocument"></a>
+                    <span class="name "><b>UserDocument</b><a href="#UserDocument"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-typealiases';
+            var COMPODOC_CURRENT_PAGE_URL = 'typealiases.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
