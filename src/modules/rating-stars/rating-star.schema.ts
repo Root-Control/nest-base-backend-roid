@@ -4,7 +4,7 @@ import { Base } from 'src/@base/entity/base.entity';
 import { User } from 'src/modules/users/user.schema';
 import { Category } from '../categories/category.schema';
 import { RatingStarReferenceType } from './rating-star-types';
-import { Review } from '../reviews/review.schema';
+import { Comment } from '../comments/comment.schema';
 
 export type RatingStarDocument = RatingStar & mongoose.Document;
 
@@ -35,7 +35,7 @@ export class RatingStar extends Base {
   })
   categoryId: string;
 
-  @Prop({ type: ObjectId, ref: Review.name })
+  @Prop({ type: ObjectId, ref: Comment.name })
   reviewId: string;
 
   @Prop({ type: ObjectId, ref: User.name })

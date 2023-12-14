@@ -6,6 +6,7 @@
         "fieldname",
         "nestjs",
         "paramtypes",
+        "ratingstars",
         "Roids",
         "typeorm"
     ]

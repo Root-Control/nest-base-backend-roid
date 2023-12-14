@@ -1,8 +1,8 @@
+import { GroupsModule } from './modules/groups/groups.module';
 import { VotesModule } from './modules/votes/votes.module';
-import { ReviewsModule } from './modules/reviews/reviews.module';
+import { CommentsModule } from './modules/comments/comments.module';
 import { SourcesModule } from './modules/sources/sources.module';
 import { CategoriesModule } from './modules/categories/categories.module';
-import { CommentsModule } from './modules/comments/comments.module';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -16,6 +16,7 @@ import { _SteroidsModule } from './modules/steroids/steroids.module';
 import config from './@common/env-configuration/config';
 import { RatingStarsModule } from './modules/rating-stars';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { ForumModule } from './modules/forum/forum.module';
 
 @Module({
   imports: [
@@ -35,12 +36,13 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
     UsersModule,
     AuthenticationModule,
     _SteroidsModule,
-    CommentsModule,
     CategoriesModule,
     SourcesModule,
     RatingStarsModule,
-    ReviewsModule,
+    CommentsModule,
     VotesModule,
+    ForumModule,
+    GroupsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

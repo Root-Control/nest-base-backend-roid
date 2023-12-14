@@ -13,7 +13,12 @@ import {
 import { SourcesService } from './sources.service';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateSourceDto } from './dto/create-source.dto';
-import { SourceDto, SourceQueryDto, UpdateSourceDto } from './dto/source.dto';
+import {
+  SourceCommentsCountDto,
+  SourceDto,
+  SourceQueryDto,
+  UpdateSourceDto,
+} from './dto/source.dto';
 import { SourcePointsDto } from './dto/source-points.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { AppUser } from 'src/@common/decorators/auth-user.decorator';
@@ -69,9 +74,24 @@ export class SourcesController {
     status: HttpStatus.BAD_REQUEST,
     description: 'Bad Request.',
   })
-  @Get('details')
-  findDetailedSource(): Promise<SourcePointsDto[]> {
-    return this.sourceService.findDetailed();
+  @Get('reviews')
+  getSourceReviews(): Promise<SourcePointsDto[]> {
+    return this.sourceService.getSourceReviews();
+  }
+
+  @ApiOperation({ summary: 'List Detailed Sources' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Find detailed sources + points.',
+    type: [SourcePointsDto],
+  })
+  @ApiResponse({
+    status: HttpStatus.BAD_REQUEST,
+    description: 'Bad Request.',
+  })
+  @Get('comments')
+  getSourceComments(): Promise<SourceCommentsCountDto[]> {
+    return this.sourceService.getSourceComments();
   }
 
   @ApiOperation({ summary: 'Get Source By Id' })

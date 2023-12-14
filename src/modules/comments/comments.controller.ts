@@ -19,8 +19,6 @@ import {
   UpdateCommentDto,
 } from './dto/comment.dto';
 import { AuthGuard } from '@nestjs/passport';
-import { UserDto } from '../users/dto/user.dto';
-import { AppUser } from 'src/@common/decorators/auth-user.decorator';
 
 @ApiTags('Comments')
 @Controller('comments')
@@ -39,12 +37,8 @@ export class CommentsController {
   })
   @UseGuards(AuthGuard('jwt'))
   @Post()
-  create(
-    @Body() createCommentDto: CreateCommentDto,
-    @AppUser() user: UserDto,
-  ): Promise<CommentDto> {
-    createCommentDto.userId = user._id;
-    return this.commentService.create(createCommentDto);
+  create(@Body() createCommentDto: CreateCommentDto): Promise<CommentDto> {
+    return this.commentService.createComment(createCommentDto);
   }
 
   @ApiOperation({ summary: 'List Comments' })
@@ -107,9 +101,9 @@ export class CommentsController {
   })
   @UseGuards(AuthGuard('jwt'))
   @Delete(':commentId')
-  deleteById(
-    @Param('commentId') commentId: string,
-  ): Promise<{ success: boolean }> {
+  deleteById(@Param('commentId') commentId: string): Promise<{
+    success: boolean;
+  }> {
     return this.commentService.delete(commentId);
   }
 }

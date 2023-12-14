@@ -10,7 +10,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CrudService } from 'src/@base/generics/crud-generic';
 import { OnEvent } from '@nestjs/event-emitter';
-import { ReviewEvent } from '../reviews/review-types';
+import { CommentEvent } from '../comments/comment-types';
 
 @Injectable()
 export class RatingStarsService extends CrudService<
@@ -26,7 +26,7 @@ export class RatingStarsService extends CrudService<
     super(ratingStarModel, RatingStarDto);
   }
 
-  @OnEvent(ReviewEvent.REVIEW_CREATE)
+  @OnEvent(CommentEvent.REVIEW_CREATE)
   async handleOrderCreatedEvent(createRatingStarDtos: CreateRatingStarDto[]) {
     await this.ratingStarModel.insertMany(createRatingStarDtos);
   }

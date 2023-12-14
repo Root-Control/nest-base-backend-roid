@@ -1,9 +1,20 @@
-export default [
+const steroidCommentsAggregation = [
   {
     $lookup: {
       from: 'comments',
-      localField: '_id',
-      foreignField: 'referenceId',
+      let: { refId: '$_id' },
+      pipeline: [
+        {
+          $match: {
+            $expr: {
+              $and: [
+                { $eq: ['$referenceId', '$$refId'] },
+                { $eq: ['$type', 'Comment'] },
+              ],
+            },
+          },
+        },
+      ],
       as: 'docs',
     },
   },
@@ -59,3 +70,5 @@ export default [
     },
   },
 ];
+
+export { steroidCommentsAggregation };

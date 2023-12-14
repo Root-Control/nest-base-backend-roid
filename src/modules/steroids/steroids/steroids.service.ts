@@ -10,9 +10,11 @@ import { CreateSteroidDto } from './dto/create-steroid.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CrudService } from 'src/@base/generics/crud-generic';
-import commentsAggregation from './query-aggregations/comments-aggregation';
 import { CommentsService } from 'src/modules/comments/comments.service';
 import { plainToClass } from 'class-transformer';
+import { getReviewAggregation } from 'src/@common/@mongodb-aggregations/global-aggregations';
+import { SteroidPointsDto } from './dto/steroid-points.dto';
+import { steroidCommentsAggregation } from './aggregations/steroids.aggregations';
 
 @Injectable()
 export class SteroidsService extends CrudService<
@@ -28,10 +30,20 @@ export class SteroidsService extends CrudService<
     super(steroidModel, SteroidDto);
   }
 
-  async findDetailedSteroids(): Promise<SteroidCommentsCountDto[]> {
-    const steroids = await this.steroidModel.aggregate(commentsAggregation);
+  async getSteroidComments(): Promise<SteroidCommentsCountDto[]> {
+    const steroids = await this.steroidModel.aggregate(
+      steroidCommentsAggregation,
+    );
     return steroids.map((steroid) =>
       plainToClass(SteroidCommentsCountDto, steroid),
     );
+  }
+
+  async getSteroidReviews(): Promise<SteroidPointsDto[]> {
+    const steroidReviewsAggregation = getReviewAggregation('Steroid');
+    const results = await this.steroidModel.aggregate(
+      steroidReviewsAggregation,
+    );
+    return results.map((res) => plainToClass(SteroidPointsDto, res));
   }
 }

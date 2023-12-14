@@ -1,6 +1,6 @@
 enum CategoryType {
-  SOURCE = 'source',
-  STEROID = 'steroid',
+  SOURCE = 'Source',
+  STEROID = 'Steroid',
 }
 
 export { CategoryType };
