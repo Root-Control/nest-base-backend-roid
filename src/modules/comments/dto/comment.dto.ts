@@ -1,7 +1,7 @@
 import { ApiPropertyOptional, OmitType, PartialType } from '@nestjs/swagger';
 import { BaseDto } from 'src/@base/dto/base.dto';
 import {
-  BooleanField,
+  ClassField,
   ClassFieldOptional,
   EnumField,
   NumberFieldOptional,
@@ -9,16 +9,27 @@ import {
 } from 'src/@common/decorators/field.decorators';
 import { CreateRatingStarDto } from 'src/modules/rating-stars/dto/create-rating-star.dto';
 import { CommentType } from '../comment-types';
+import { Exclude, Expose, Transform } from 'class-transformer';
+import { UserDto } from 'src/modules/users/dto/user.dto';
 
 export class CommentDto extends BaseDto {
-  @BooleanField({ swagger: true })
-  isRated: boolean;
-
   @StringField({ swagger: true })
   comments: string;
 
   @StringField({ swagger: true })
   referenceId: string;
+
+  @StringField({ swagger: true })
+  referenceType: string;
+
+  @Exclude()
+  @ClassField(() => UserDto, { swagger: true })
+  userId: UserDto;
+
+  @Expose()
+  @ClassField(() => UserDto, { swagger: true })
+  @Transform(({ obj }) => obj.userId, { toClassOnly: true })
+  user: UserDto;
 
   @EnumField(() => CommentType, { swagger: true })
   type: CommentType;
@@ -46,4 +57,6 @@ export class CommentQueryDto extends PartialType(
   @ApiPropertyOptional()
   @NumberFieldOptional()
   limit: number;
+
+  populate: string[];
 }

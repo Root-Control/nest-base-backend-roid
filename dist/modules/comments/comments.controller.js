@@ -30,6 +30,7 @@ let CommentsController = class CommentsController {
         return this.commentService.createComment(createCommentDto);
     }
     find(commentQueryDto) {
+        commentQueryDto.populate = ['userId'];
         return this.commentService.find(commentQueryDto);
     }
     findById(commentId) {

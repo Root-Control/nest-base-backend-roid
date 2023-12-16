@@ -35,7 +35,12 @@ let AuthController = class AuthController {
         return new login_payload_dto_1.LoginPayloadDto(user, token);
     }
     async userRegister(createUserDto) {
-        return this.userService.create(createUserDto);
+        const user = await this.userService.create(createUserDto);
+        const token = await this.authenticationService.createAccessToken({
+            userId: user._id,
+            role: user.role,
+        });
+        return new login_payload_dto_1.LoginPayloadDto(user, token);
     }
 };
 exports.AuthController = AuthController;

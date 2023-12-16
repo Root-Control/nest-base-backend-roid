@@ -15,13 +15,11 @@ const base_dto_1 = require("../../../@base/dto/base.dto");
 const field_decorators_1 = require("../../../@common/decorators/field.decorators");
 const create_rating_star_dto_1 = require("../../rating-stars/dto/create-rating-star.dto");
 const comment_types_1 = require("../comment-types");
+const class_transformer_1 = require("class-transformer");
+const user_dto_1 = require("../../users/dto/user.dto");
 class CommentDto extends base_dto_1.BaseDto {
 }
 exports.CommentDto = CommentDto;
-__decorate([
-    (0, field_decorators_1.BooleanField)({ swagger: true }),
-    __metadata("design:type", Boolean)
-], CommentDto.prototype, "isRated", void 0);
 __decorate([
     (0, field_decorators_1.StringField)({ swagger: true }),
     __metadata("design:type", String)
@@ -30,6 +28,21 @@ __decorate([
     (0, field_decorators_1.StringField)({ swagger: true }),
     __metadata("design:type", String)
 ], CommentDto.prototype, "referenceId", void 0);
+__decorate([
+    (0, field_decorators_1.StringField)({ swagger: true }),
+    __metadata("design:type", String)
+], CommentDto.prototype, "referenceType", void 0);
+__decorate([
+    (0, class_transformer_1.Exclude)(),
+    (0, field_decorators_1.ClassField)(() => user_dto_1.UserDto, { swagger: true }),
+    __metadata("design:type", user_dto_1.UserDto)
+], CommentDto.prototype, "userId", void 0);
+__decorate([
+    (0, class_transformer_1.Expose)(),
+    (0, field_decorators_1.ClassField)(() => user_dto_1.UserDto, { swagger: true }),
+    (0, class_transformer_1.Transform)(({ obj }) => obj.userId, { toClassOnly: true }),
+    __metadata("design:type", user_dto_1.UserDto)
+], CommentDto.prototype, "user", void 0);
 __decorate([
     (0, field_decorators_1.EnumField)(() => comment_types_1.CommentType, { swagger: true }),
     __metadata("design:type", String)

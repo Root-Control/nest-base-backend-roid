@@ -32,16 +32,18 @@ export abstract class CrudService<
 
   async find(queryDto: QueryDTO): Promise<DTO[]> {
     const { skip, limit, populate, ...props } = queryDto;
-    const items = await this.model.find(props, null, {
-      skip,
-      limit,
-      populate: populate || [],
-    });
+    const items = await this.model
+      .find(props, null, {
+        skip,
+        limit,
+        populate: populate || [],
+      })
+      .sort({ createdAt: -1 });
 
     return items.map((it) => plainToClass(this.dtoClass, it.toObject()));
   }
 
-  async findById(_id: string): Promise<any> {
+  async findById(_id: string): Promise<DTO> {
     try {
       const result = await this.model.findById(_id);
 

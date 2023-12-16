@@ -59,6 +59,7 @@ export class CommentsController {
   })
   @Get()
   find(@Query() commentQueryDto: CommentQueryDto): Promise<CommentDto[]> {
+    commentQueryDto.populate = ['userId'];
     return this.commentService.find(commentQueryDto);
   }
 
