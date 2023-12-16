@@ -11,10 +11,10 @@ export declare class CommentDto extends BaseDto {
     type: CommentType;
     ratingStars: CreateRatingStarDto[];
 }
-declare const UpdateCommentDto_base: import("@nestjs/common").Type<Partial<Omit<CommentDto, "ratingStars" | "createdAt" | "updatedAt" | "_id">>>;
+declare const UpdateCommentDto_base: import("@nestjs/common").Type<Partial<Omit<CommentDto, "_id" | "createdAt" | "updatedAt" | "ratingStars">>>;
 export declare class UpdateCommentDto extends UpdateCommentDto_base {
 }
-declare const CommentQueryDto_base: import("@nestjs/common").Type<Partial<Omit<CommentDto, "ratingStars" | "createdAt" | "updatedAt">>>;
+declare const CommentQueryDto_base: import("@nestjs/common").Type<Partial<Omit<CommentDto, "createdAt" | "updatedAt" | "ratingStars">>>;
 export declare class CommentQueryDto extends CommentQueryDto_base {
     skip: number;
     limit: number;

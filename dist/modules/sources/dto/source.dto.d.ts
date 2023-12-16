@@ -25,7 +25,7 @@ export declare class SourceDetailDto extends SourceDetailDto_base {
     points: Points[];
     score: number;
 }
-declare const UpdateSourceDto_base: import("@nestjs/common").Type<Partial<Omit<SourceDto, "createdAt" | "updatedAt" | "_id">>>;
+declare const UpdateSourceDto_base: import("@nestjs/common").Type<Partial<Omit<SourceDto, "_id" | "createdAt" | "updatedAt">>>;
 export declare class UpdateSourceDto extends UpdateSourceDto_base {
 }
 declare const SourceQueryDto_base: import("@nestjs/common").Type<Partial<Omit<SourceDto, "createdAt" | "updatedAt">>>;

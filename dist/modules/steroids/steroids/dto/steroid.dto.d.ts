@@ -24,7 +24,7 @@ export declare class SteroidDetailDto extends SteroidDetailDto_base {
     lastReview: CommentDto;
     score: number;
 }
-declare const UpdateSteroidDto_base: import("@nestjs/common").Type<Partial<Omit<SteroidDto, "createdAt" | "updatedAt" | "_id">>>;
+declare const UpdateSteroidDto_base: import("@nestjs/common").Type<Partial<Omit<SteroidDto, "_id" | "createdAt" | "updatedAt">>>;
 export declare class UpdateSteroidDto extends UpdateSteroidDto_base {
 }
 declare const SteroidQueryDto_base: import("@nestjs/common").Type<Partial<Omit<SteroidDto, "createdAt" | "updatedAt">>>;
