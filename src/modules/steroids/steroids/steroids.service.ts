@@ -12,9 +12,11 @@ import { Model } from 'mongoose';
 import { CrudService } from 'src/@base/generics/crud-generic';
 import { CommentsService } from 'src/modules/comments/comments.service';
 import { plainToClass } from 'class-transformer';
-import { getReviewAggregation } from 'src/@common/@mongodb-aggregations/global-aggregations';
 import { SteroidPointsDto } from './dto/steroid-points.dto';
-import { steroidCommentsAggregation } from './aggregations/steroids.aggregations';
+import {
+  steroidCommentsAggregation,
+  steroidReviewsAggregation,
+} from './aggregations/steroids.aggregations';
 
 @Injectable()
 export class SteroidsService extends CrudService<
@@ -40,7 +42,6 @@ export class SteroidsService extends CrudService<
   }
 
   async getSteroidReviews(): Promise<SteroidPointsDto[]> {
-    const steroidReviewsAggregation = getReviewAggregation('Steroid');
     const results = await this.steroidModel.aggregate(
       steroidReviewsAggregation,
     );

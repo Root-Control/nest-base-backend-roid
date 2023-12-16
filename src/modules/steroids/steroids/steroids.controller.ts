@@ -61,6 +61,7 @@ export class SteroidsController {
   })
   @Get()
   find(@Query() steroidQueryDto: SteroidQueryDto): Promise<SteroidDto[]> {
+    steroidQueryDto.populate = ['commonNameId', 'manufacturerId'];
     return this.steroidService.find(steroidQueryDto);
   }
 

@@ -11,7 +11,7 @@ import {
 } from 'src/@common/decorators/field.decorators';
 
 export class CreateUserDto {
-  @StringField({ swagger: true })
+  @StringField({ swagger: true, maxLength: 16 })
   username: string;
 
   @EmailField({ swagger: true })

@@ -12,4 +12,7 @@ export class Points {
 
   @NumberField({ swagger: true })
   roundedAverage: number;
+
+  @NumberField({ swagger: true })
+  count: number;
 }

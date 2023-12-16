@@ -17,6 +17,9 @@ export class CommentDto extends BaseDto {
   @StringField({ swagger: true })
   comments: string;
 
+  @StringField({ swagger: true })
+  referenceId: string;
+
   @EnumField(() => CommentType, { swagger: true })
   type: CommentType;
 

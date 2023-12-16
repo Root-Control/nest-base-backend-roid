@@ -105,8 +105,8 @@ export class SourcesController {
     description: 'Bad Request.',
   })
   @Get(':sourceId')
-  findById(@Param('sourceId') sourceId: string): Promise<SourceDto> {
-    return this.sourceService.findById(sourceId);
+  findById(@Param('sourceId') sourceId: string): Promise<SourcePointsDto> {
+    return this.sourceService.getSourceReviewsById(sourceId);
   }
 
   @ApiOperation({ summary: 'Get Source By Id' })

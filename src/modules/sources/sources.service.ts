@@ -12,8 +12,11 @@ import { Model } from 'mongoose';
 import { CrudService } from 'src/@base/generics/crud-generic';
 import { plainToClass } from 'class-transformer';
 import { SourcePointsDto } from './dto/source-points.dto';
-import { getReviewAggregation } from 'src/@common/@mongodb-aggregations/global-aggregations';
-import { sourceCommentsAggregation } from './aggregations/sources.aggregations';
+import {
+  sourceCommentsAggregation,
+  sourceReviewsAggregation,
+  sourceReviewsAggregationById,
+} from './aggregations/sources.aggregations';
 
 @Injectable()
 export class SourcesService extends CrudService<
@@ -36,8 +39,19 @@ export class SourcesService extends CrudService<
   }
 
   async getSourceReviews(): Promise<SourcePointsDto[]> {
-    const sourceReviewsAggregation = getReviewAggregation('Source');
-    const results = await this.sourceModel.aggregate(sourceReviewsAggregation);
-    return results.map((res) => plainToClass(SourcePointsDto, res));
+    const sourceReviews = await this.sourceModel.aggregate(
+      sourceReviewsAggregation,
+    );
+    const sourceReviewsDtos = sourceReviews.map((res) =>
+      plainToClass(SourcePointsDto, res),
+    );
+
+    return sourceReviewsDtos.sort((rev1, rev2) => rev2.score - rev1.score);
+  }
+
+  async getSourceReviewsById(sourceId: string): Promise<SourcePointsDto> {
+    const aggregationQuery = sourceReviewsAggregationById(sourceId);
+    const [source] = await this.sourceModel.aggregate(aggregationQuery);
+    return plainToClass(SourcePointsDto, source);
   }
 }

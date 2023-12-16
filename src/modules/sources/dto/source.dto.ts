@@ -5,14 +5,22 @@ import {
   NumberField,
   NumberFieldOptional,
   StringField,
+  StringFieldOptional,
 } from 'src/@common/decorators/field.decorators';
+import { CommentDto } from 'src/modules/comments/dto/comment.dto';
 import { UserDto } from 'src/modules/users/dto/user.dto';
 
 export class SourceDto extends BaseDto {
   @StringField({ swagger: true })
   url: string;
 
-  @StringField({ swagger: true })
+  @StringFieldOptional({ minLength: 1, swagger: true })
+  htmlTitle: string;
+
+  @StringFieldOptional({ minLength: 1, swagger: true })
+  htmlInfo: string;
+
+  @StringFieldOptional({ minLength: 1, swagger: true })
   description: string;
 
   @StringField({ swagger: true })
@@ -24,12 +32,21 @@ export class SourceCommentsCountDto extends BaseDto {
   url: string;
 
   @StringField({ swagger: true })
+  descriptionTitle: string;
+
+  @StringField({ swagger: true })
   description: string;
 
-  @ClassField(() => UserDto)
+  @ClassField(() => UserDto, { swagger: true })
   user: UserDto;
 
-  @NumberField()
+  @ClassField(() => CommentDto, { swagger: true })
+  lastComment: CommentDto;
+
+  @ClassField(() => UserDto, { swagger: true })
+  lastCommentUser: UserDto;
+
+  @NumberField({ swagger: true })
   commentCount: number;
 }
 
