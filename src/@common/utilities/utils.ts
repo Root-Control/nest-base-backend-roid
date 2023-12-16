@@ -49,3 +49,13 @@ export function getVariableName<TResult>(
 export function getString(key: string): string {
   return key.replaceAll('\\n', '\n');
 }
+
+export function calculateScore(points: number[]): number {
+  if (!points || points.length === 0) {
+    return 0;
+  }
+
+  const totalAverage =
+    points.reduce((acc, point) => acc + point, 0) / points.length;
+  return totalAverage * 20;
+}

@@ -74,14 +74,20 @@ export abstract class CrudService<
 
   async update(_id: string, payload: UpdateDto): Promise<DTO> {
     try {
-      const article = await this.model.findOneAndUpdate({ _id }, payload, {
+      const entity = await this.model.findOneAndUpdate({ _id }, payload, {
         new: true,
       });
-      if (!article) {
+      console.log('Payload here');
+      console.log(payload);
+
+      console.log('Entity here');
+      console.log(entity);
+      console.log(_id);
+      if (!entity) {
         throw new Error(`${this.model.modelName} not found`);
       }
 
-      return plainToClass(this.dtoClass, article.toObject());
+      return plainToClass(this.dtoClass, entity.toObject());
     } catch (ex) {
       throw new HttpException(
         getErrorMessage(ex),

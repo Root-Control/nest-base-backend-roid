@@ -1,55 +1,74 @@
-import {
-  ApiProperty,
-  ApiPropertyOptional,
-  OmitType,
-  PartialType,
-} from '@nestjs/swagger';
+import { ApiPropertyOptional, OmitType, PartialType } from '@nestjs/swagger';
 import { BaseDto } from 'src/@base/dto/base.dto';
 import {
   ClassField,
+  ClassFieldOptional,
   NumberField,
   NumberFieldOptional,
   StringField,
 } from 'src/@common/decorators/field.decorators';
 import { CommonNameDto } from '../../common-names/dto/common-name.dto';
-import { Exclude, Expose, Transform, Type } from 'class-transformer';
 import { ManufacturerDto } from '../../manufacturers/dto/manufacturer.dto';
+import { Points } from 'src/@base/@shared/shared';
+import { UserDto } from 'src/modules/users/dto/user.dto';
+import { CommentDto } from 'src/modules/comments/dto/comment.dto';
+import { Expose, Transform } from 'class-transformer';
+import { calculateScore } from 'src/@common/utilities/utils';
 
 export class SteroidDto extends BaseDto {
   @StringField({ swagger: true })
   name: string;
 
-  @Expose()
-  @ApiProperty({ type: () => CommonNameDto })
-  @Transform(({ obj }) => obj.commonNameId, { toClassOnly: true })
-  @Type(() => CommonNameDto)
-  commonName: CommonNameDto;
+  @StringField({ swagger: true })
+  commonNameId: string;
 
-  @Expose()
-  @ApiProperty({ type: () => ManufacturerDto })
-  @Transform(({ obj }) => obj.manufacturerId, { toClassOnly: true })
-  @Type(() => ManufacturerDto)
-  manufacturer: ManufacturerDto;
+  @StringField({ swagger: true })
+  manufacturerId: string;
 
-  @Exclude()
-  commonNameId: CommonNameDto;
-
-  @Exclude()
-  manufacturerId: ManufacturerDto;
+  @StringField({ swagger: true })
+  userId: string;
 }
 
-export class SteroidCommentsCountDto extends BaseDto {
+export class SteroidDetailDto extends PartialType(
+  OmitType(SteroidDto, ['commonNameId', 'manufacturerId', 'userId'] as const),
+) {
   @StringField({ swagger: true })
   name: string;
 
-  @ClassField(() => CommonNameDto)
+  @ClassField(() => CommonNameDto, { swagger: true })
   commonName: CommonNameDto;
 
-  @ClassField(() => ManufacturerDto)
+  @ClassField(() => ManufacturerDto, { swagger: true })
   manufacturer: ManufacturerDto;
 
-  @NumberField()
+  @ClassField(() => Points, { swagger: true })
+  points: Points[];
+
+  @ClassField(() => UserDto, { swagger: true })
+  user: UserDto;
+
+  @NumberField({ swagger: true })
   commentCount: number;
+
+  @ClassFieldOptional(() => CommentDto, { swagger: true })
+  lastComment: CommentDto;
+
+  @ClassFieldOptional(() => UserDto, { swagger: true })
+  lastCommentUser: UserDto;
+
+  @NumberField({ swagger: true })
+  reviewCount: number;
+
+  @ClassFieldOptional(() => CommentDto, { swagger: true })
+  lastReview: CommentDto;
+
+  @NumberField({ swagger: true })
+  @Expose()
+  @Transform(({ obj }) => {
+    const points = obj.points.map((point) => point.average);
+    return calculateScore(points);
+  })
+  score: number;
 }
 
 export class UpdateSteroidDto extends PartialType(

@@ -12,8 +12,14 @@ export class Source extends Base {
   @Prop({ type: String, required: true })
   url: string;
 
-  @Prop({ type: String, required: true })
+  @Prop({ type: String })
   description: string;
+
+  @Prop({ type: String, default: 'Important Information' })
+  htmlTitle: string;
+
+  @Prop({ type: String })
+  htmlInfo: string;
 
   @Prop({ type: String, required: false })
   sourceImage: string;

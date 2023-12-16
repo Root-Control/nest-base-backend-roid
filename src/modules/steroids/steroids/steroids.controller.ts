@@ -13,7 +13,7 @@ import { SteroidsService } from './steroids.service';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateSteroidDto } from './dto/create-steroid.dto';
 import {
-  SteroidCommentsCountDto,
+  SteroidDetailDto,
   SteroidDto,
   UpdateSteroidDto,
 } from './dto/steroid.dto';
@@ -57,8 +57,8 @@ export class SteroidsController {
     description: 'Bad Request.',
   })
   @Get()
-  find(): Promise<SteroidCommentsCountDto[]> {
-    return this.steroidService.findDetailedSteroids();
+  find(): Promise<SteroidDetailDto[]> {
+    return this.steroidService.getDetailedSteroids();
   }
 
   @ApiOperation({ summary: 'Get Steroid By Id' })
@@ -72,8 +72,8 @@ export class SteroidsController {
     description: 'Bad Request.',
   })
   @Get(':steroidId')
-  findById(@Param('steroidId') steroidId: string): Promise<SteroidDto> {
-    return this.steroidService.findById(steroidId);
+  findById(@Param('steroidId') steroidId: string): Promise<SteroidDetailDto> {
+    return this.steroidService.getDetailedSteroids(steroidId);
   }
 
   @ApiOperation({ summary: 'Get Steroid By Id' })

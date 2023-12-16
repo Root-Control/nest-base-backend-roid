@@ -8,6 +8,12 @@ export class CreateSourceDto {
   url: string;
 
   @StringFieldOptional({ minLength: 1, swagger: true })
+  htmlTitle: string;
+
+  @StringFieldOptional({ minLength: 1, swagger: true })
+  htmlInfo: string;
+
+  @StringFieldOptional({ minLength: 1, swagger: true })
   description: string;
 
   userId: string;

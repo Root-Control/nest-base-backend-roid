@@ -2,8 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import * as mongoose from 'mongoose';
 import { Base } from 'src/@base/entity/base.entity';
 import { User } from '../users/user.schema';
-import { Steroid } from '../steroids/steroids/steroid.schema';
-import { Source } from '../sources/source.schema';
+import { CommentReferenceType, CommentType } from './comment-types';
 
 export type CommentDocument = Comment & mongoose.Document;
 
@@ -11,20 +10,28 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 
 @Schema({ autoCreate: true })
 export class Comment extends Base {
-  @Prop({ type: String, required: true })
-  content: string;
+  @Prop({ type: Boolean, required: true })
+  isRated: boolean;
 
-  @Prop({ type: [String], required: false })
-  images: string[];
+  @Prop({ type: String, required: true })
+  comments: string;
+
+  @Prop({
+    type: String,
+    enum: [CommentType.COMMENT, CommentType.REVIEW, CommentType.POST],
+  })
+  type: CommentType;
 
   @Prop({
     type: String,
     required: true,
+    enum: [
+      CommentReferenceType.STEROID,
+      CommentReferenceType.SOURCE,
+      CommentReferenceType.POST,
+    ],
   })
-  type: string;
-
-  @Prop({ type: String, required: true, enum: [Steroid.name, Source.name] })
-  referenceType: string;
+  referenceType: CommentReferenceType;
 
   @Prop({ type: ObjectId, refPath: 'referenceType' })
   referenceId: mongoose.Types.ObjectId;
