@@ -5,7 +5,6 @@ import {
   HttpStatus,
   Get,
   Put,
-  Query,
   Param,
   Delete,
   UseGuards,
@@ -13,13 +12,7 @@ import {
 import { SourcesService } from './sources.service';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateSourceDto } from './dto/create-source.dto';
-import {
-  SourceCommentsCountDto,
-  SourceDto,
-  SourceQueryDto,
-  UpdateSourceDto,
-} from './dto/source.dto';
-import { SourcePointsDto } from './dto/source-points.dto';
+import { SourceDetailDto, SourceDto, UpdateSourceDto } from './dto/source.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { AppUser } from 'src/@common/decorators/auth-user.decorator';
 import { UserDto } from '../users/dto/user.dto';
@@ -60,53 +53,23 @@ export class SourcesController {
     description: 'Bad Request.',
   })
   @Get()
-  find(@Query() sourceQueryDto: SourceQueryDto): Promise<SourceDto[]> {
-    return this.sourceService.find(sourceQueryDto);
-  }
-
-  @ApiOperation({ summary: 'List Detailed Sources' })
-  @ApiResponse({
-    status: HttpStatus.OK,
-    description: 'Find detailed sources + points.',
-    type: [SourcePointsDto],
-  })
-  @ApiResponse({
-    status: HttpStatus.BAD_REQUEST,
-    description: 'Bad Request.',
-  })
-  @Get('reviews')
-  getSourceReviews(): Promise<SourcePointsDto[]> {
-    return this.sourceService.getSourceReviews();
-  }
-
-  @ApiOperation({ summary: 'List Detailed Sources' })
-  @ApiResponse({
-    status: HttpStatus.OK,
-    description: 'Find detailed sources + points.',
-    type: [SourcePointsDto],
-  })
-  @ApiResponse({
-    status: HttpStatus.BAD_REQUEST,
-    description: 'Bad Request.',
-  })
-  @Get('comments')
-  getSourceComments(): Promise<SourceCommentsCountDto[]> {
-    return this.sourceService.getSourceComments();
+  find(): Promise<SourceDetailDto[]> {
+    return this.sourceService.getDetailedSources();
   }
 
   @ApiOperation({ summary: 'Get Source By Id' })
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Source By Id Loaded.',
-    type: SourceDto,
+    type: SourceDetailDto,
   })
   @ApiResponse({
     status: HttpStatus.BAD_REQUEST,
     description: 'Bad Request.',
   })
   @Get(':sourceId')
-  findById(@Param('sourceId') sourceId: string): Promise<SourcePointsDto> {
-    return this.sourceService.getSourceReviewsById(sourceId);
+  findById(@Param('sourceId') sourceId: string): Promise<SourceDetailDto> {
+    return this.sourceService.getDetailedSources(sourceId);
   }
 
   @ApiOperation({ summary: 'Get Source By Id' })
